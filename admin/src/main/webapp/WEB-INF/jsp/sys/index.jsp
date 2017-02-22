@@ -116,7 +116,7 @@
 <script src="${global}/plugins/plupload-2.1.2/js/moxie.min.js"></script>
 <script src="${global}/plugins/plupload-2.1.2/js/plupload.dev.js"></script>
 
-<script src="${global}/plugins/bootstrap-sweetalert/sweetalert.min.js"
+<script src="${global}/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 
 <script src="${global}/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
@@ -140,7 +140,7 @@
 <script src="${ctx}/static/js/go.common.js"></script>
 <script src="${ctx}/static/js/api.js"></script>
 <script src="${ctx}/static/js/jquery.tips.js"></script>
-
+<link type="text/css" rel="stylesheet" href="${ctx}/assets/global/plugins/jstree/dist/themes/default/style.min.css">
 </body>
 <script>
 
