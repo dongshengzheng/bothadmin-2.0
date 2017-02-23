@@ -1,8 +1,8 @@
 package com.ctoangels.go.common.modules.sys.service;
 
-import com.ctoangels.go.common.modules.sys.entity.Office;
-import com.ctoangels.go.common.modules.sys.entity.Office;
+
 import com.baomidou.framework.service.ISuperService;
+import com.ctoangels.go.common.modules.sys.entity.Office;
 
 /**
  *

@@ -8,83 +8,19 @@
 <go:navigater path="user"></go:navigater>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-social-dribbble font-blue-sharp"></i>
-                    <span class="caption-subject font-blue-sharp bold uppercase">Default Tree</span>
+                    <i class="font-blue-sharp"></i>
+                    <span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>
                 </div>
             </div>
-            <div class="portlet-body">
-
-                <div id="tree_1" class="tree-demo jstree jstree-1 jstree-default" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="j1_8" aria-busy="false">
-                    <ul class="jstree-container-ul jstree-children" role="group">
-                        <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j1_1_anchor" aria-expanded="true" id="j1_1" class="jstree-node  jstree-open">
-                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                            <a class="jstree-anchor" href="#" tabindex="-1" id="j1_1_anchor">
-                                <i class="jstree-icon jstree-themeicon fa fa-folder icon-state-warning icon-lg jstree-themeicon-custom" role="presentation"></i>
-                                Root node 1
-                            </a>
-                            <ul role="group" class="jstree-children">
-                                <li role="treeitem" data-jstree="{ &quot;selected&quot; : true }" aria-selected="true" aria-level="2" aria-labelledby="j1_2_anchor" id="j1_2" class="jstree-node  jstree-leaf">
-                                    <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                                    <a class="jstree-anchor  jstree-clicked" href="javascript:;" tabindex="-1" id="j1_2_anchor">
-                                        <i class="jstree-icon jstree-themeicon fa fa-folder icon-state-warning icon-lg jstree-themeicon-custom" role="presentation"></i>
-                                        Initially selected
-                                    </a>
-                                </li>
-                                <li role="treeitem" data-jstree="{ &quot;icon&quot; : &quot;fa fa-briefcase icon-state-success &quot; }" aria-selected="false" aria-level="2" aria-labelledby="j1_3_anchor" id="j1_3" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i>
-                                    <a class="jstree-anchor" href="#" tabindex="-1" id="j1_3_anchor">
-                                        <i class="jstree-icon jstree-themeicon fa fa-briefcase icon-state-success  jstree-themeicon-custom" role="presentation"></i>
-                                        custom icon URL
-                                    </a>
-                                </li>
-                                <li role="treeitem" data-jstree="{ &quot;opened&quot; : true }" aria-selected="false" aria-level="2" aria-labelledby="j1_4_anchor" aria-expanded="true" id="j1_4" class="jstree-node  jstree-open">
-                                    <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                                    <a class="jstree-anchor" href="#" tabindex="-1" id="j1_4_anchor">
-                                        <i class="jstree-icon jstree-themeicon fa fa-folder icon-state-warning icon-lg jstree-themeicon-custom" role="presentation"></i>
-                                        initially open
-                                    </a>
-                                    <ul role="group" class="jstree-children">
-                                        <li role="treeitem" data-jstree="{ &quot;disabled&quot; : true }" aria-selected="false" aria-level="3" aria-labelledby="j1_5_anchor" aria-disabled="true" id="j1_5" class="jstree-node  jstree-leaf">
-                                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                                            <a class="jstree-anchor  jstree-disabled" href="#" tabindex="-1" id="j1_5_anchor">
-                                                <i class="jstree-icon jstree-themeicon fa fa-folder icon-state-warning icon-lg jstree-themeicon-custom" role="presentation"></i>
-                                                Disabled Node
-                                            </a>
-                                        </li>
-                                        <li role="treeitem" data-jstree="{ &quot;type&quot; : &quot;file&quot; }" aria-selected="false" aria-level="3" aria-labelledby="j1_6_anchor" id="j1_6" class="jstree-node  jstree-leaf jstree-last">
-                                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                                            <a class="jstree-anchor" href="#" tabindex="-1" id="j1_6_anchor">
-                                                <i class="jstree-icon jstree-themeicon fa fa-file icon-state-warning icon-lg jstree-themeicon-custom" role="presentation"></i>
-                                                Another node
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li role="treeitem" data-jstree="{ &quot;icon&quot; : &quot;fa fa-warning icon-state-danger&quot; }" aria-selected="false" aria-level="2" aria-labelledby="j1_7_anchor" id="j1_7" class="jstree-node  jstree-leaf jstree-last">
-                                    <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                                    <a class="jstree-anchor" href="#" tabindex="-1" id="j1_7_anchor">
-                                        <i class="jstree-icon jstree-themeicon fa fa-warning icon-state-danger jstree-themeicon-custom" role="presentation"></i>
-                                        Custom icon class (bootstrap)
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li role="treeitem" data-jstree="{ &quot;type&quot; : &quot;file&quot; }" aria-selected="false" aria-level="1" aria-labelledby="j1_8_anchor" id="j1_8" class="jstree-node  jstree-leaf jstree-last">
-                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
-                            <a class="jstree-anchor" href="http://www.jstree.com" tabindex="-1" id="j1_8_anchor">
-                                <i class="jstree-icon jstree-themeicon fa fa-file icon-state-warning icon-lg jstree-themeicon-custom" role="presentation"></i>
-                                Clickanle link node
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div id="tree_body" class="portlet-body">
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="portlet light bordered">
             <div class="portlet-body">
                 <div class="table-toolbar">
@@ -99,7 +35,8 @@
                                 </shiro:hasPermission>
                                 <shiro:hasPermission name="user/batchDelete">
 
-                                    <button data-url="user/batchDelete" data-msg="确定批量删除吗？" data-model="ajaxToDo"
+                                    <button data-url="user/batchDelete" data-msg="确定批量删除吗？"
+                                            data-model="ajaxToDo"
                                             class="btn btn-outline btn-circle btn-sm green"
                                             data-checkbox-name="chx_default" data-callback="refreshTable">批量删除
                                         <i class="fa fa-times"></i>
@@ -185,6 +122,38 @@
 
                 initSearchForm("", "搜索用户名和姓名");
 
+            }
+        });
+//        $('#tree_body').jstree({
+//            'plugins' : [ "types" ],
+//            'core' : {
+//                "themes" : {
+//                    "responsive" : false
+//                },
+//                'data' :  [
+//                    { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+//                    { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+//                    { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+//                    { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+//                ]
+//            },
+//            "types" : {
+//                "default" : {
+//                    "icon" : "fa fa-folder icon-state-warning icon-lg"
+//                },
+//                "file" : {
+//                    "icon" : "fa fa-file icon-state-warning icon-lg"
+//                }
+//            }
+//        });
+        $('#tree_body').jstree({
+            'core': {
+                'data': {
+                    'url': 'office/list',
+                    'data': function (result) {
+                        return result;
+                    }
+                }
             }
         });
     });
