@@ -124,28 +124,7 @@
 
             }
         });
-//        $('#tree_body').jstree({
-//            'plugins' : [ "types" ],
-//            'core' : {
-//                "themes" : {
-//                    "responsive" : false
-//                },
-//                'data' :  [
-//                    { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
-//                    { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
-//                    { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
-//                    { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
-//                ]
-//            },
-//            "types" : {
-//                "default" : {
-//                    "icon" : "fa fa-folder icon-state-warning icon-lg"
-//                },
-//                "file" : {
-//                    "icon" : "fa fa-file icon-state-warning icon-lg"
-//                }
-//            }
-//        });
+        // 通过ajax创建树状图
         $('#tree_body').jstree({
             'core': {
                 'data': {
@@ -154,7 +133,13 @@
                         return result;
                     }
                 }
-            }
+            },
+            "types" : {
+                "default" : {
+                    "icon" : "fa fa-folder icon-state-warning icon-lg"
+                }
+            },
+            "plugins" : [ "types" ]
         });
     });
 
