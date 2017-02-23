@@ -140,6 +140,7 @@
 <script src="${ctx}/static/js/go.common.js"></script>
 <script src="${ctx}/static/js/api.js"></script>
 <script src="${ctx}/static/js/jquery.tips.js"></script>
+<%--画树状图所需要的文件--%>
 <script src="${ctx}/assets/global/plugins/jstree/dist/jstree.min.js"></script>
 <link type="text/css" rel="stylesheet" href="${ctx}/assets/global/plugins/jstree/dist/themes/default/style.min.css">
 </body>
