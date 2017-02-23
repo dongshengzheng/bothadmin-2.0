@@ -1,5 +1,7 @@
 package com.ctoangels.go.common.modules.sys.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.sys.entity.Office;
 import com.ctoangels.go.common.modules.sys.entity.State;
 import com.ctoangels.go.common.modules.sys.entity.Tree;
@@ -31,7 +33,12 @@ public class OfficeController extends BaseController {
         this.officeService = officeService;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    /**
+     * 创建树状图所用到的方法
+     *
+     * @return 基于jztree JSON格式的JSON集合
+     */
+    @RequestMapping(value = "/findAllOffice", method = RequestMethod.GET)
     @ResponseBody
     public List<Tree> findOffice() {
         List<Office> offices = officeService.selectList(null);
@@ -47,5 +54,18 @@ public class OfficeController extends BaseController {
             }
         }
         return trees;
+    }
+
+    @RequestMapping
+    public String page() {
+        return "sys/office/office_list";
+    }
+
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public JSONObject listMenu() {
+        EntityWrapper<Office> ew = getEntityWrapper();
+        ew.addFilter("parent_id={0}", "#");
+        return jsonPage(officeService.selectPage(getPage(), ew));
     }
 }

@@ -24,7 +24,7 @@
         $('#tree_body').jstree({
             'core': {
                 'data': {
-                    'url': 'office/list',
+                    'url': 'office/findAllOffice',
                     'data': function (result) {
                         return result;
                     }
