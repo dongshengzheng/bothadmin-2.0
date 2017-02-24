@@ -17,7 +17,7 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 <shiro:hasPermission name="office/add">
-                                    <button data-url="role/add" data-model="dialog"
+                                    <button data-url="office/add" data-model="dialog"
                                             class="btn btn-outline btn-circle btn-sm green"> 新增
                                         <i class="fa fa-plus"></i>
                                     </button>

@@ -3,9 +3,11 @@ package com.ctoangels.go.common.modules.sys.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.sys.entity.Office;
+import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.State;
 import com.ctoangels.go.common.modules.sys.entity.Tree;
 import com.ctoangels.go.common.modules.sys.service.IOfficeService;
+import com.ctoangels.go.common.util.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +69,20 @@ public class OfficeController extends BaseController {
         EntityWrapper<Office> ew = getEntityWrapper();
         ew.addFilter("parent_id={0}", "#");
         return jsonPage(officeService.selectPage(getPage(), ew));
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String toAdd() {
+        return "sys/office/office_add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject add(Office office) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", 1);
+        // office.setDelFlag(Const.DEL_FLAG_NORMAL);
+        officeService.insert(office);
+        return jsonObject;
     }
 }
