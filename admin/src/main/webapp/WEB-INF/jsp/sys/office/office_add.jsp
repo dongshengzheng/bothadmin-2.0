@@ -33,7 +33,7 @@
                 <label class="col-sm-2 control-label">地区选择</label>
                 <div class="col-sm-7">
                     <div class="input-group">
-                        <input class="form-control" placeholder="请点击按钮进行选择" type="text" readonly>
+                        <input class="form-control" placeholder="请点击按钮进行选择" type="text" value="${areaName}" readonly>
                         <span class="input-group-btn">
                             <button data-url="area/add" data-model="dialog" class="btn btn-outline green"> 选择
                                 <i class="fa fa-edit"></i>
@@ -59,8 +59,10 @@
     </div>
 </form>
 <script type="text/javascript">
-    $("#defForm").validate();
     $(function () {
+        // 通过jQuery.validation对表单内容进行前端验证
+        $("#defForm").validate();
+
         $.ajax({
             type: 'GET',
             url: 'office/findAllOffice',

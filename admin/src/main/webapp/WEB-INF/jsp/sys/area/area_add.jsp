@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<form class="form-horizontal" action="office/add" method="post"
-      id="defForm" callfn="refreshTable">
+<form class="form-horizontal" action="area/add" method="post" id="defForm" callfn="refreshTable">
     <div class="modal-header">
         <div class='bootstrap-dialog-header'>
             <div class='bootstrap-dialog-close-button'
@@ -18,7 +17,7 @@
                 <label for="provinceId" class="col-sm-3 control-label">省级市选择</label>
                 <div class="col-sm-7">
                     <select class="form-control" id="provinceId" name="provinceId">
-                        <option value="#">请选择省级市</option>
+                        <option value="">请选择省级市</option>
                     </select>
                 </div>
             </div>
@@ -26,7 +25,7 @@
                 <label for="cityId" class="col-sm-3 control-label">地级市选择</label>
                 <div class="col-sm-7">
                     <select class="form-control" id="cityId" name="cityId">
-                        <option value="#">请选择地级市</option>
+                        <option value="">请选择地级市</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +33,7 @@
                 <label for="countyId" class="col-sm-3 control-label">县级市选择</label>
                 <div class="col-sm-7">
                     <select class="form-control" id="countyId" name="countyId">
-                        <option value="#">请选择县级市</option>
+                        <option value="">请选择县级市</option>
                     </select>
                 </div>
             </div>
@@ -42,8 +41,8 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <shiro:hasPermission name="office/add">
-            <button type="submit" class="btn btn-primary">保存</button>
+        <shiro:hasPermission name="area/add">
+            <button type="submit" class="btn btn-primary">确定</button>
         </shiro:hasPermission>
     </div>
 </form>

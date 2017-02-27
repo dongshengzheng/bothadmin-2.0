@@ -68,11 +68,12 @@
     </div>
 </div>
 <script type="text/javascript">
-    var defTable;
-    var tree = $('#tree_body');
-    var r;
     //    $(document).ready(function () {
     $(function () {
+        var defTable;
+        var tree = $('#tree_body');
+        var r;
+
         defTable = $('#default_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -123,45 +124,46 @@
                 initSearchForm(null, "搜索机构名");
             }
         });
-    });
 
-    function refreshTable(toFirst) {
-        //defaultTable.ajax.reload();
-        if (toFirst) {//表格重绘，并跳转到第一页
-            defTable.draw();
-        } else {//表格重绘，保持在当前页
-            defTable.draw(false);
+
+        function refreshTable(toFirst) {
+            //defaultTable.ajax.reload();
+            if (toFirst) {//表格重绘，并跳转到第一页
+                defTable.draw();
+            } else {//表格重绘，保持在当前页
+                defTable.draw(false);
+            }
         }
-    }
 
-    // 通过ajax创建树状图
-    tree.jstree({
-        'core': {
-            'data': {
-                'url': 'office/findAllOffice',
-                'data': function (result) {
-                    return result;
+        // 通过ajax创建树状图
+        tree.jstree({
+            'core': {
+                'data': {
+                    'url': 'office/findAllOffice',
+                    'data': function (result) {
+                        return result;
+                    }
                 }
-            }
-        },
-        "types": {
-            "default": {
-                "icon": "fa fa-folder icon-state-warning icon-lg"
-            }
-        },
-        "plugins": ["types"]
-    });
+            },
+            "types": {
+                "default": {
+                    "icon": "fa fa-folder icon-state-warning icon-lg"
+                }
+            },
+            "plugins": ["types"]
+        });
 
-    tree.on('select_node.jstree', function (e, data) {
-        var i, j;
-        for (i = 0, j = data.selected.length; i < j; i++) {
-            var node = data.instance.get_node(data.selected[i]);
-            // if (data.instance.is_leaf(node)) {
-            //    r.push(node.id);
-            // }
-            r = node.id;
-        }
-        console.log(r);
-        defTable.draw(false);
+        tree.on('select_node.jstree', function (e, data) {
+            var i, j;
+            for (i = 0, j = data.selected.length; i < j; i++) {
+                var node = data.instance.get_node(data.selected[i]);
+                // if (data.instance.is_leaf(node)) {
+                //    r.push(node.id);
+                // }
+                r = node.id;
+            }
+            // console.log(r);
+            defTable.draw(false);
+        });
     });
 </script>
