@@ -69,7 +69,10 @@
 </div>
 <script type="text/javascript">
     var defTable;
-    $(document).ready(function () {
+    var tree = $('#tree_body');
+    var r;
+    //    $(document).ready(function () {
+    $(function () {
         defTable = $('#default_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -80,8 +83,9 @@
                 "url": "office/list",
                 "type": "post",
                 "data": function (data) {
-                    data.roleName = $("#officeName").val();
-                    data.keyword = $("#keyword").val();
+                    // data.roleName = $("#officeName").val();
+                    // data.keyword = $("#keyword").val();
+                    data.parentId = r;
                 }
             },
             "language": {
@@ -130,37 +134,34 @@
         }
     }
 
-    $(function () {
-        var tree = $('#tree_body');
-        // 通过ajax创建树状图
-        tree.jstree({
-            'core': {
-                'data': {
-                    'url': 'office/findAllOffice',
-                    'data': function (result) {
-                        return result;
-                    }
+    // 通过ajax创建树状图
+    tree.jstree({
+        'core': {
+            'data': {
+                'url': 'office/findAllOffice',
+                'data': function (result) {
+                    return result;
                 }
-            },
-            "types": {
-                "default": {
-                    "icon": "fa fa-folder icon-state-warning icon-lg"
-                }
-            },
-            "plugins": ["types"]
-        });
-
-        tree.on('changed.jstree', function (e, data) {
-            var r = [];
-            var i, j;
-            for (i = 0, j = data.selected.length; i < j; i++) {
-                var node = data.instance.get_node(data.selected[i]);
-                // if (data.instance.is_leaf(node)) {
-                //    r.push(node.id);
-                // }
-                r.push(node.parent);
             }
-            console.log(r.join());
-        })
+        },
+        "types": {
+            "default": {
+                "icon": "fa fa-folder icon-state-warning icon-lg"
+            }
+        },
+        "plugins": ["types"]
+    });
+
+    tree.on('select_node.jstree', function (e, data) {
+        var i, j;
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            var node = data.instance.get_node(data.selected[i]);
+            // if (data.instance.is_leaf(node)) {
+            //    r.push(node.id);
+            // }
+            r = node.id;
+        }
+        console.log(r);
+        defTable.draw(false);
     });
 </script>
