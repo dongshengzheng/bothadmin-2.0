@@ -3,15 +3,14 @@ package com.ctoangels.go.common.modules.sys.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.sys.entity.Office;
-import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.State;
 import com.ctoangels.go.common.modules.sys.entity.Tree;
 import com.ctoangels.go.common.modules.sys.service.IOfficeService;
-import com.ctoangels.go.common.util.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,9 +64,13 @@ public class OfficeController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JSONObject listMenu() {
+    public JSONObject listMenu(Office office) {
         EntityWrapper<Office> ew = getEntityWrapper();
-        ew.addFilter("parent_id={0}", "#");
+        if (!StringUtils.isEmpty(office.getParentId())) {
+            ew.addFilter("parent_id={0}", office.getParentId());
+        } else {
+            ew.addFilter("parent_id={0}", "#");
+        }
         return jsonPage(officeService.selectPage(getPage(), ew));
     }
 

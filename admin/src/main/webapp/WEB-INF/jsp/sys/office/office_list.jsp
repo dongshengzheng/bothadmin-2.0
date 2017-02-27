@@ -8,7 +8,19 @@
 <go:navigater path="office"/>
 
 <div class="row">
-    <jsp:include page="../tree/tree.jsp"/>
+    <%--<jsp:include page="../tree/tree.jsp"/>--%>
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="font-blue-sharp"></i>
+                    <span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>
+                </div>
+            </div>
+            <div id="tree_body" class="portlet-body">
+            </div>
+        </div>
+    </div>
     <div class="col-md-9">
         <div class="portlet light bordered">
             <div class="portlet-body">
@@ -117,4 +129,38 @@
             defTable.draw(false);
         }
     }
+
+    $(function () {
+        var tree = $('#tree_body');
+        // 通过ajax创建树状图
+        tree.jstree({
+            'core': {
+                'data': {
+                    'url': 'office/findAllOffice',
+                    'data': function (result) {
+                        return result;
+                    }
+                }
+            },
+            "types": {
+                "default": {
+                    "icon": "fa fa-folder icon-state-warning icon-lg"
+                }
+            },
+            "plugins": ["types"]
+        });
+
+        tree.on('changed.jstree', function (e, data) {
+            var r = [];
+            var i, j;
+            for (i = 0, j = data.selected.length; i < j; i++) {
+                var node = data.instance.get_node(data.selected[i]);
+                // if (data.instance.is_leaf(node)) {
+                //    r.push(node.id);
+                // }
+                r.push(node.parent);
+            }
+            console.log(r.join());
+        })
+    });
 </script>
