@@ -19,7 +19,7 @@
                 <label for="parentId" class="col-sm-2 control-label">上级机构</label>
                 <div class="col-sm-7">
                     <select class="form-control" id="parentId" name="parentId">
-                        <option value="${office.parentId}">无</option>
+                        <option value="${office.parentId}">${officeName}</option>
                     </select>
                 </div>
             </div>
