@@ -98,7 +98,6 @@ public class RoleController extends BaseController {
         roleService.deleteBatchIds(Arrays.asList(ids.split(",")));
         jsonObject.put("status", 1);
         return jsonObject;
-
     }
 
     @RequestMapping(value = "/editRight", method = RequestMethod.GET)

@@ -35,7 +35,7 @@
                                     </button>
                                 </shiro:hasPermission>
                                 <shiro:hasPermission name="office/batchDelete">
-                                    <button data-url="role/batchDelete" data-msg="确定批量删除吗？" data-model="ajaxToDo"
+                                    <button data-url="office/batchDelete" data-msg="确定批量删除吗？" data-model="ajaxToDo"
                                             class="btn btn-outline btn-circle btn-sm green"
                                             data-checkbox-name="chx_default" data-callback="refreshTable">批量删除
                                         <i class="fa fa-times"></i>

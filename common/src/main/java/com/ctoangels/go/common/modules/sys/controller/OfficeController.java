@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -107,6 +108,15 @@ public class OfficeController extends BaseController {
     public JSONObject delete(@RequestParam Integer id) {
         officeService.deleteById(id);
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", 1);
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/batchDelete")
+    @ResponseBody
+    public JSONObject batchDelete(String ids) {
+        JSONObject jsonObject = new JSONObject();
+        officeService.deleteBatchIds(Arrays.asList(ids.split(",")));
         jsonObject.put("status", 1);
         return jsonObject;
     }
