@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -98,6 +99,15 @@ public class OfficeController extends BaseController {
         office.setDelFlag(String.valueOf(Const.DEL_FLAG_NORMAL));
         office.setCode(code);
         officeService.insert(office);
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/delete")
+    @ResponseBody
+    public JSONObject delete(@RequestParam Integer id) {
+        officeService.deleteById(id);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", 1);
         return jsonObject;
     }
 }

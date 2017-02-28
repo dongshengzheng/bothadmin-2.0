@@ -68,12 +68,11 @@
     </div>
 </div>
 <script type="text/javascript">
-    //    $(document).ready(function () {
-    $(function () {
-        var defTable;
-        var tree = $('#tree_body');
-        var r;
-
+    var defTable;
+    var tree = $('#tree_body');
+    var r;
+    $(document).ready(function () {
+//    $(function () {
         defTable = $('#default_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -109,8 +108,8 @@
                         <shiro:hasPermission name="role/editBtn">
                         + '<a href="role/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="role/deleteBtn">
-                        + '<a href="role/delete?id=' + row.id + '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
+                        <shiro:hasPermission name="office/deleteBtn">
+                        + '<a href="office/delete?id=' + row.id + '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
                         </shiro:hasPermission>
                         <shiro:hasPermission name="role/editRight">
                         + '<a href="role/editRight?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-user"></i>分配权限</a>'
@@ -125,33 +124,27 @@
             }
         });
 
-
-        function refreshTable(toFirst) {
-            //defaultTable.ajax.reload();
-            if (toFirst) {//表格重绘，并跳转到第一页
-                defTable.draw();
-            } else {//表格重绘，保持在当前页
-                defTable.draw(false);
-            }
+        // 通过ajax创建树状图
+        function drawTree() {
+            tree.jstree({
+                'core': {
+                    'data': {
+                        'url': 'office/findAllOffice',
+                        'data': function (result) {
+                            return result;
+                        }
+                    }
+                },
+                "types": {
+                    "default": {
+                        "icon": "fa fa-folder icon-state-warning icon-lg"
+                    }
+                },
+                "plugins": ["types"]
+            });
         }
 
-        // 通过ajax创建树状图
-        tree.jstree({
-            'core': {
-                'data': {
-                    'url': 'office/findAllOffice',
-                    'data': function (result) {
-                        return result;
-                    }
-                }
-            },
-            "types": {
-                "default": {
-                    "icon": "fa fa-folder icon-state-warning icon-lg"
-                }
-            },
-            "plugins": ["types"]
-        });
+        drawTree();
 
         tree.on('select_node.jstree', function (e, data) {
             var i, j;
@@ -166,4 +159,13 @@
             defTable.draw(false);
         });
     });
+
+    function refreshTable(toFirst) {
+        //defaultTable.ajax.reload();
+        if (toFirst) {//表格重绘，并跳转到第一页
+            defTable.draw();
+        } else {//表格重绘，保持在当前页
+            defTable.draw(false);
+        }
+    }
 </script>
