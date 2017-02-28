@@ -7,6 +7,8 @@ import com.ctoangels.go.common.modules.sys.service.ICityService;
 import com.ctoangels.go.common.modules.sys.service.ICountyService;
 import com.ctoangels.go.common.modules.sys.service.IProvinceService;
 import com.ctoangels.go.common.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/area")
 public class AreaController extends BaseController {
+
+    private static Logger logger = LoggerFactory.getLogger(AreaController.class);
+
     @Resource
     private IProvinceService provinceService;
     @Resource
@@ -39,18 +44,18 @@ public class AreaController extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(String provinceId, String cityId, String countyId) {
+    public String add(String provinceId, String cityId, String countyId, ModelMap map) {
         if (StringUtils.isNotEmpty(provinceId) && StringUtils.isNotEmpty(cityId) && StringUtils.isNotEmpty(countyId)) {
-            Province province = provinceService.selectById(Integer.parseInt(provinceId));
-            City city = cityService.selectById(Integer.parseInt(cityId));
-            County county = countyService.selectById(Integer.parseInt(countyId));
-            Area area = areaService.selectOne(new EntityWrapper<Area>().addFilter("parent_ids", province.getId() + "," + city.getId() + "," + county.getId() + ","));
-            // map.put("areaId", area.getId());
-            // map.put("areaName", province.getProvinceName() + city.getCityName() + county.getCountyName());
-            // return "sys/office/add";
-            return String.valueOf(area.getId());
+            Province province = provinceService.selectOne(new EntityWrapper<Province>().addFilter("province_id={0}", Integer.parseInt(provinceId)));
+            City city = cityService.selectOne(new EntityWrapper<City>().addFilter("city_id={0}", Long.parseLong(cityId)));
+            County county = countyService.selectOne(new EntityWrapper<County>().addFilter("county_id={0}", Long.parseLong(countyId)));
+            Area area = areaService.selectOne(new EntityWrapper<Area>().addFilter("name={0}", county.getCountyName()));
+            map.put("areaId", String.valueOf(area.getId()));
+            map.put("areaName", province.getProvinceName() + city.getCityName() + county.getCountyName());
+            return "sys/office/office_add";
+        } else {
+            return "sys/area/area_add";
         }
-        return null;
     }
 
     @RequestMapping(value = "/findAllArea")

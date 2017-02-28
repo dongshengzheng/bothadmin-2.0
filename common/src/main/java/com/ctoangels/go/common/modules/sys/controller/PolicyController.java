@@ -39,7 +39,7 @@ public class PolicyController {
     @RequestMapping(value = "/policy", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> get() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         String dir = "go/upload-images/";
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
