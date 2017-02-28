@@ -9,3 +9,5 @@
 **/.DS_Store
 commons/
 **/CustomGenerator.java
+admin/src/test/
+common/src/test/resources/

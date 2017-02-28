@@ -8,6 +8,7 @@ import com.ctoangels.go.common.util.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -119,5 +120,13 @@ public class OfficeController extends BaseController {
         officeService.deleteBatchIds(Arrays.asList(ids.split(",")));
         jsonObject.put("status", 1);
         return jsonObject;
+    }
+
+    @RequestMapping(value = "/addSubsidiary")
+    public String toAddSubsidiary(Integer id, ModelMap map) {
+        Office office = officeService.selectById(id);
+        map.put("officeId", id);
+        map.put("officeName", office.getName());
+        return "sys/office/office_subsidiary";
     }
 }
