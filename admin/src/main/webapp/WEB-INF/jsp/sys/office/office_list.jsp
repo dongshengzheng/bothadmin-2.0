@@ -72,7 +72,6 @@
     var tree = $('#tree_body');
     var r;
     $(document).ready(function () {
-//    $(function () {
         defTable = $('#default_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -128,6 +127,7 @@
         function drawTree() {
             tree.jstree({
                 'core': {
+                    "multiple": false,
                     'data': {
                         'url': 'office/findAllOffice',
                         'data': function (result) {
@@ -157,7 +157,7 @@
             }
             // console.log(r);
             defTable.draw(false);
-        });
+        }).jstree();
     });
 
     function refreshTable(toFirst) {
