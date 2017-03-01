@@ -129,4 +129,58 @@ public class OfficeController extends BaseController {
         map.put("officeName", office.getName());
         return "sys/office/office_subsidiary";
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String toEdit(@RequestParam Integer id, ModelMap map) {
+        Office office = officeService.selectById(id); // 部门包装类
+        String parentOfficeName; // 父级部门名称
+        if (office.getParentId().equals("#")) {
+            parentOfficeName = "无";
+        } else {
+            parentOfficeName = String.valueOf(officeService.selectById(office.getParentId()).getName());
+        }
+        Area countyArea = areaService.selectById(office.getAreaId());
+        County county = countyService.selectOne(new EntityWrapper<County>().addFilter("county_name={0}", countyArea.getName()));
+
+        Area cityArea = areaService.selectById(countyArea.getParentId());
+        City city = cityService.selectOne(new EntityWrapper<City>().addFilter("city_name={0}", cityArea.getName()));
+
+        Area provinceArea = areaService.selectById(cityArea.getParentId());
+        Province province = provinceService.selectOne(new EntityWrapper<Province>().addFilter("province_name={0}", provinceArea.getName()));
+        Integer provinceId = province.getProvinceId();
+        String provinceName = province.getProvinceName();
+        Long cityId = city.getCityId();
+        String cityName = city.getCityName();
+        Long countyId = county.getCountyId();
+        String countyName = county.getCountyName();
+
+        map.put("office", office);
+        map.put("parentOfficeName", parentOfficeName);
+        map.put("provinceId", provinceId);
+        map.put("provinceName", provinceName);
+        map.put("cityId", cityId);
+        map.put("cityName", cityName);
+        map.put("countyId", countyId);
+        map.put("countyName", countyName);
+
+        return "sys/office/office_edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject add(String id, String parentId, String name, String provinceId, String cityId, String countyId, String code, String type, String grade, String sort) {
+        County county = countyService.selectOne(new EntityWrapper<County>().addFilter("county_id={0}", Long.parseLong(countyId)));
+        Area area = areaService.selectOne(new EntityWrapper<Area>().addFilter("name={0}", county.getCountyName()));
+        int areaId = area.getId();
+        Office superiorOffice = officeService.selectById(parentId);
+        String parentIds = superiorOffice.getParentIds() + superiorOffice.getId() + ",";
+        Office office = new Office(parentId, parentIds, name, new BigDecimal(sort), String.valueOf(areaId), type, grade, String.valueOf(1), new Date(), String.valueOf(1), new Date());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", 1);
+        office.setDelFlag(String.valueOf(Const.DEL_FLAG_NORMAL));
+        office.setCode(code);
+        office.setId(id);
+        officeService.updateById(office);
+        return jsonObject;
+    }
 }

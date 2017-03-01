@@ -105,13 +105,13 @@
                 "targets": 4,
                 "render": function (data, type, row) {
                     return ""
-                        <shiro:hasPermission name="role/editBtn">
-                        + '<a href="role/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
+                        <shiro:hasPermission name="office/editBtn">
+                        + '<a href="office/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
                         </shiro:hasPermission>
                         <shiro:hasPermission name="office/deleteBtn">
                         + '<a href="office/delete?id=' + row.id + '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="role/editRight">
+                        <shiro:hasPermission name="office/addSubsidiary">
                         + '<a href="office/addSubsidiary?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-user"></i>添加下级机构</a>'
                         </shiro:hasPermission>;
                 }
