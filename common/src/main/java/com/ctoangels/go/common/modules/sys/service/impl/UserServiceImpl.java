@@ -2,10 +2,6 @@ package com.ctoangels.go.common.modules.sys.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.ctoangels.go.common.modules.sys.mapper.RoleMapper;
-import com.ctoangels.go.common.modules.sys.mapper.UserMapper;
-import com.ctoangels.go.common.modules.sys.mapper.UserRoleMapper;
 import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.entity.UserRole;
@@ -46,7 +42,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
 
     public List<Role> getRoles(Integer userId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("del_flag", 1);
+        map.put("del_flag", 0);
         map.put("allocatable", 1);
         List<Role> roles = roleMapper.selectByMap(map);
         map = new HashMap<>();
@@ -72,6 +68,24 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
             for (String roleId : roleIdArr) {
                 UserRole userRole = new UserRole();
                 userRole.setUserId(userId);
+                userRole.setRoleId(Integer.valueOf(roleId));
+                list.add(userRole);
+            }
+            Map<String, Object> map = new HashMap<>();
+            map.put("user_id", userId);
+            userRoleMapper.deleteByMap(map);
+            userRoleMapper.insertBatch(list);
+        }
+    }
+
+    @Override
+    public void editRole(String userId, String roleIds) {
+        if (StringUtils.isNotBlank(userId) && StringUtils.isNotBlank(roleIds)) {
+            List<UserRole> list = new ArrayList<>();
+            String[] roleIdArr = roleIds.split(",");
+            for (String roleId : roleIdArr) {
+                UserRole userRole = new UserRole();
+                userRole.setUserId(Integer.parseInt(userId));
                 userRole.setRoleId(Integer.valueOf(roleId));
                 list.add(userRole);
             }

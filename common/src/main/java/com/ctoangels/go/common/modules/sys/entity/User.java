@@ -246,4 +246,33 @@ public class User implements Serializable {
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", loginName='" + loginName + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", lastLogin=" + lastLogin +
+                ", ip='" + ip + '\'' +
+                ", delFlag=" + delFlag +
+                ", description='" + description + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", score=" + score +
+                ", identification='" + identification + '\'' +
+                ", prefer='" + prefer + '\'' +
+                ", address='" + address + '\'' +
+                ", headImgUrl='" + headImgUrl + '\'' +
+                ", emailCode='" + emailCode + '\'' +
+                ", emailStatus=" + emailStatus +
+                ", emailTime=" + emailTime +
+                ", openId='" + openId + '\'' +
+                ", roles=" + roles +
+                ", roleIds='" + roleIds + '\'' +
+                ", styleId=" + styleId +
+                ", companyId=" + companyId +
+                '}';
+    }
 }

@@ -170,11 +170,20 @@ public class UserController extends BaseController {
         return "sys/user/user_role_edit";
     }
 
+    // @RequestMapping(value = "/editRole", method = RequestMethod.POST)
+    // @ResponseBody
+    // public JSONObject editRole(User user) {
+    //     JSONObject result = new JSONObject();
+    //     userService.editRole(user);
+    //     result.put("status", 1);
+    //     return result;
+    // }
+
     @RequestMapping(value = "/editRole", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject editRole(User user) {
+    public JSONObject editRole(String userId, String roleIds) {
         JSONObject result = new JSONObject();
-        userService.editRole(user);
+        userService.editRole(userId, roleIds);
         result.put("status", 1);
         return result;
     }
