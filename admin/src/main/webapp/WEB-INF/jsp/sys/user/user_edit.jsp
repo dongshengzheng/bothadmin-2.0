@@ -1,3 +1,4 @@
+<%--@elvariable id="user" type="com.ctoangels.go.common.modules.sys.entity.User"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
@@ -60,26 +61,50 @@
                 </div>
             </div>
             <shiro:hasPermission name="user/editRole">
-            <div class="form-group">
-                <label for="description" class="col-sm-2 control-label">角色</label>
-                <div class="col-sm-7" style="margin-top:7px;">
-                    <c:choose>
-                        <c:when test="${user.roles != null && fn:length(user.roles) > 0}">
-                            <c:forEach items="${user.roles}" var="role" varStatus="vs">
-                                <label class="mt-checkbox mt-checkbox-outline"> ${role.roleName}
-                                    <input type="checkbox" name="roleIds" value="${role.id}" ${role.checked ? "checked" : ""}>
-                                    <span></span>
-                                </label>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <tr>
-                                <td colspan="5">没有相关数据</td>
-                            </tr>
-                        </c:otherwise>
-                    </c:choose>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">角色</label>
+                    <div class="col-sm-7" style="margin-top:7px;">
+                        <c:choose>
+                            <c:when test="${user.roles != null && fn:length(user.roles) > 0}">
+                                <c:forEach items="${user.roles}" var="role" varStatus="vs">
+                                    <label class="mt-checkbox mt-checkbox-outline"> ${role.roleName}
+                                        <input type="checkbox" name="roleIds"
+                                               value="${role.id}" ${role.checked ? "checked" : ""}>
+                                        <span></span>
+                                    </label>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <tr>
+                                    <td colspan="5">没有相关数据</td>
+                                </tr>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
                 </div>
-            </div>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="user/editOffice">
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">部门</label>
+                    <div class="col-sm-7" style="margin-top:7px;">
+                        <c:choose>
+                            <c:when test="${user.offices != null && fn:length(user.offices) > 0}">
+                                <c:forEach items="${user.offices}" var="office" varStatus="vs">
+                                    <label class="mt-checkbox mt-checkbox-outline"> ${office.name}
+                                        <input type="checkbox" name="officeIds"
+                                               value="${office.id}" ${office.checked ? "checked" : ""}>
+                                        <span></span>
+                                    </label>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <tr>
+                                    <td colspan="5">没有相关数据</td>
+                                </tr>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
             </shiro:hasPermission>
         </div>
     </div>

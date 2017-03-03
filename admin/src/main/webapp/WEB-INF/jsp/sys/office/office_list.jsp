@@ -83,7 +83,7 @@
                 "type": "post",
                 "data": function (data) {
                     // data.roleName = $("#officeName").val();
-                    // data.keyword = $("#keyword").val();
+                    data.keyword = $("#keyword").val();
                     data.parentId = r;
                 }
             },
@@ -124,27 +124,23 @@
         });
 
         // 通过ajax创建树状图
-        function drawTree() {
-            tree.jstree({
-                'core': {
-                    "multiple": false,
-                    'data': {
-                        'url': 'office/findAllOffice',
-                        'data': function (result) {
-                            return result;
-                        }
+        tree.jstree({
+            'core': {
+                "multiple": false,
+                'data': {
+                    'url': 'office/findAllOffice',
+                    'data': function (result) {
+                        return result;
                     }
-                },
-                "types": {
-                    "default": {
-                        "icon": "fa fa-folder icon-state-warning icon-lg"
-                    }
-                },
-                "plugins": ["types"]
-            });
-        }
-
-        drawTree();
+                }
+            },
+            "types": {
+                "default": {
+                    "icon": "fa fa-folder icon-state-warning icon-lg"
+                }
+            },
+            "plugins": ["types"]
+        });
 
         tree.on('select_node.jstree', function (e, data) {
             var i, j;

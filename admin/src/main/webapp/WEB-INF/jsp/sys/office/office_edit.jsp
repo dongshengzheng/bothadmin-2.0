@@ -48,19 +48,22 @@
                     <label for="provinceId" class="col-sm-4 control-label">省级市选择</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="provinceId" name="provinceId">
-                            <option value="${provinceId}">${provinceName}</option>
+                            <%--<option value="${provinceId}">${provinceName}</option>--%>
+                            <option value="">请选择省级市</option>
                         </select>
                     </div>
                     <label for="cityId" class="col-sm-4 control-label">地级市选择</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="cityId" name="cityId">
-                            <option value="${cityId}">${cityName}</option>
+                            <%--<option value="${cityId}">${cityName}</option>--%>
+                            <option value="">请选择地级市</option>
                         </select>
                     </div>
                     <label for="countyId" class="col-sm-4 control-label">县级市选择</label>
                     <div class="col-sm-7">
                         <select class="form-control" id="countyId" name="countyId">
-                            <option value="${countyId}">${countyName}</option>
+                            <%--<option value="${countyId}">${countyName}</option>--%>
+                            <option value="">请选择县级市</option>
                         </select>
                     </div>
                 </div>
@@ -164,11 +167,13 @@
                 alert('处理失败');
             },
             success: function (result) {
+                var provinceSelect = $('#provinceId');
                 var html = '';
                 for (var i = 0; i < result.length; i++) {
                     html += '<option value=' + result[i].provinceId + '>' + result[i].provinceName + "</option>";
                 }
-                $('#provinceId').append(html);
+                provinceSelect.append(html);
+                <%--provinceSelect.find("option[value=${provinceId}]").attr("selected", true);--%>
             }
         });
         // 查找地级市

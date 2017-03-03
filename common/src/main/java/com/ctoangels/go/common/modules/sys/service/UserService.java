@@ -2,6 +2,7 @@ package com.ctoangels.go.common.modules.sys.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.ISuperService;
+import com.ctoangels.go.common.modules.sys.entity.Office;
 import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.User;
 
@@ -13,9 +14,13 @@ import java.util.List;
 public interface UserService extends ISuperService<User> {
     List<Role> getRoles(Integer userId);
 
+    List<Office> getOffices(Integer userId);
+
     void editRole(User user);
 
     void editRole(String userId, String roleIds);
+
+    void editOffice(User user);
 
     boolean isNameExist(String loginName);
 

@@ -126,6 +126,9 @@ public class Office implements Serializable {
     @TableField(value = "del_flag")
     private String delFlag;
 
+    @TableField(exist = false)
+    private Boolean checked;
+
     public Office() {
     }
 
@@ -142,6 +145,14 @@ public class Office implements Serializable {
         this.createDate = createDate;
         this.updateBy = updateBy;
         this.updateDate = updateDate;
+    }
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
 
     public String getId() {

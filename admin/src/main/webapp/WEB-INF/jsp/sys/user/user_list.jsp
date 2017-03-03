@@ -8,7 +8,19 @@
 <go:navigater path="user"></go:navigater>
 
 <div class="row">
-    <jsp:include page="../tree/tree.jsp"/>
+    <%--<jsp:include page="../tree/tree.jsp"/>--%>
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="font-blue-sharp"></i>
+                    <span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>
+                </div>
+            </div>
+            <div id="tree_body" class="portlet-body">
+            </div>
+        </div>
+    </div>
     <div class="col-md-9">
         <div class="portlet light bordered">
             <div class="portlet-body">
@@ -59,6 +71,8 @@
 </div>
 <script type="text/javascript">
     var defTable;
+    var tree = $('#tree_body');
+    var r;
     $(document).ready(function () {
         defTable = $('#default_table').DataTable({
             "ordering": false,
@@ -71,6 +85,7 @@
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
+                    data.id = r;
                 }
             },
             "language": {
@@ -113,6 +128,38 @@
 
             }
         });
+
+        // 通过ajax创建树状图
+        tree.jstree({
+            'core': {
+                "multiple": false,
+                'data': {
+                    'url': 'office/findAllOffice',
+                    'data': function (result) {
+                        return result;
+                    }
+                }
+            },
+            "types": {
+                "default": {
+                    "icon": "fa fa-folder icon-state-warning icon-lg"
+                }
+            },
+            "plugins": ["types"]
+        });
+
+        tree.on('select_node.jstree', function (e, data) {
+            var i, j;
+            for (i = 0, j = data.selected.length; i < j; i++) {
+                var node = data.instance.get_node(data.selected[i]);
+                // if (data.instance.is_leaf(node)) {
+                //    r.push(node.id);
+                // }
+                r = node.id;
+            }
+            // console.log(r);
+            defTable.draw(false);
+        }).jstree();
     });
 
     function refreshTable(toFirst) {

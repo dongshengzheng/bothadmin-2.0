@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.User;
+import com.ctoangels.go.common.modules.sys.entity.UserOffice;
+import com.ctoangels.go.common.modules.sys.service.IUserOfficeService;
 import com.ctoangels.go.common.modules.sys.service.RoleService;
 import com.ctoangels.go.common.modules.sys.service.UserService;
 import com.ctoangels.go.common.util.Const;
@@ -21,8 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Sun.Han
@@ -42,6 +47,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private RoleService roleService;
+
+    @Resource
+    private IUserOfficeService userOfficeService;
 
     @RequestMapping(value = "/editPwd", method = RequestMethod.GET)
     public String editPwd() {
@@ -66,10 +74,24 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JSONObject list(@RequestParam(required = false) String keyword) {
+    public JSONObject list(@RequestParam(required = false) String keyword, @RequestParam(required = false) String id) {
         EntityWrapper<User> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.addFilter("CONCAT(IFNULL(login_name,''),IFNULL(name,'')) like {0}", "%" + keyword + "%");
+        if (StringUtils.isNotBlank(id)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("office_id", id);
+            List<UserOffice> userOffices = userOfficeService.selectByMap(map);
+            Object[] params = new Object[userOffices.size()];
+            for (UserOffice userOffice : userOffices) {
+                params[userOffices.indexOf(userOffice)] = userOffice.getUserId();
+            }
+            if (params.length > 0) {
+                ew.addFilter("id={0}", params);
+            } else {
+                ew.addFilter("id={0}", -1);
+            }
+        }
         return jsonPage(userService.selectPage(getPage(), ew));
     }
 
@@ -119,6 +141,7 @@ public class UserController extends BaseController {
     public String toEdit(@RequestParam Integer id, ModelMap map) {
         User user = userService.selectById(id);
         user.setRoles(userService.getRoles(id));
+        user.setOffices(userService.getOffices(id));
 
         map.put("user", user);
         return "sys/user/user_edit";
@@ -138,7 +161,10 @@ public class UserController extends BaseController {
         }
         userService.updateSelectiveById(user);
         Subject subject = SecurityUtils.getSubject();
-        if (subject.hasRole(Const.ADMIN_ROLE)) userService.editRole(user);
+        if (subject.hasRole(Const.ADMIN_ROLE)) {
+            userService.editRole(user);
+            userService.editOffice(user);
+        }
         result.put("status", 1);
         return result;
     }

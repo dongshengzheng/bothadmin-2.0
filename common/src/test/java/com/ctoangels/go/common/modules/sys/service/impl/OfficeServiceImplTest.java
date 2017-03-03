@@ -11,7 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xhj224 on 2017/2/23.
@@ -30,6 +32,8 @@ public class OfficeServiceImplTest {
     private ICountyService countyService;
     @Resource
     private IAreaService areaService;
+    @Resource
+    private IUserOfficeService userOfficeService;
 
     /**
      * 测试获取所有Office的方法
@@ -95,5 +99,13 @@ public class OfficeServiceImplTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void selectUserOffices() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("office_id", 2);
+        List<UserOffice> userOffices = userOfficeService.selectByMap(map);
+        userOffices.forEach(System.out::println);
     }
 }

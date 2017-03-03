@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.ctoangels.go.common.util.Const;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +61,27 @@ public class User implements Serializable {
     @TableField(value = "company_id")
     private Integer companyId;
 
+    @TableField(exist = false)
+    private String officeIds;
+
+    @TableField(exist = false)
+    private List<Office> offices;
+
+    public String getOfficeIds() {
+        return officeIds;
+    }
+
+    public void setOfficeIds(String officeIds) {
+        this.officeIds = officeIds;
+    }
+
+    public List<Office> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(List<Office> offices) {
+        this.offices = offices;
+    }
 
     public String getRoleIds() {
         return roleIds;
@@ -273,6 +293,8 @@ public class User implements Serializable {
                 ", roleIds='" + roleIds + '\'' +
                 ", styleId=" + styleId +
                 ", companyId=" + companyId +
+                ", officeIds='" + officeIds + '\'' +
+                ", offices=" + offices +
                 '}';
     }
 }
