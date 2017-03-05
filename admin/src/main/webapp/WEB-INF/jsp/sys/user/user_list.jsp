@@ -157,7 +157,7 @@
                 // }
                 r = node.id;
             }
-            // console.log(r);
+            console.log(r);
             defTable.draw(false);
         }).jstree();
     });

@@ -6,6 +6,9 @@ import com.ctoangels.go.common.modules.sys.mapper.OfficeMapper;
 import com.ctoangels.go.common.modules.sys.service.IOfficeService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 
 /**
  * Office 表数据服务层接口实现类
@@ -13,4 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfficeServiceImpl extends SuperServiceImpl<OfficeMapper, Office> implements IOfficeService {
 
+    @Resource
+    private OfficeMapper officeMapper;
+
+    @Override
+    public List<Office> findOfficeByParentId(Integer id) {
+        return officeMapper.searchOfficeByParentId(id);
+    }
 }

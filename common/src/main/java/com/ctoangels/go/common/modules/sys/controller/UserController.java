@@ -2,9 +2,11 @@ package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.go.common.modules.sys.entity.Office;
 import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.entity.UserOffice;
+import com.ctoangels.go.common.modules.sys.service.IOfficeService;
 import com.ctoangels.go.common.modules.sys.service.IUserOfficeService;
 import com.ctoangels.go.common.modules.sys.service.RoleService;
 import com.ctoangels.go.common.modules.sys.service.UserService;
@@ -25,9 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Sun.Han
@@ -50,6 +52,8 @@ public class UserController extends BaseController {
 
     @Resource
     private IUserOfficeService userOfficeService;
+    @Resource
+    private IOfficeService officeService;
 
     @RequestMapping(value = "/editPwd", method = RequestMethod.GET)
     public String editPwd() {
@@ -79,15 +83,20 @@ public class UserController extends BaseController {
         if (!StringUtils.isEmpty(keyword))
             ew.addFilter("CONCAT(IFNULL(login_name,''),IFNULL(name,'')) like {0}", "%" + keyword + "%");
         if (StringUtils.isNotBlank(id)) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("office_id", id);
-            List<UserOffice> userOffices = userOfficeService.selectByMap(map);
+            List<Office> offices = officeService.findOfficeByParentId(Integer.valueOf(id));
+            Set<Integer> officeIdsSet = new HashSet<>();
+            for (Office office : offices) {
+                officeIdsSet.add(Integer.valueOf(office.getId()));
+            }
+            // 根据部门集合，查出所在部门的UserOffice集合
+            List<UserOffice> userOffices = userOfficeService.selectList(new EntityWrapper<UserOffice>().in("office_id", officeIdsSet));
+            userOffices.forEach(System.out::println);
             Object[] params = new Object[userOffices.size()];
             for (UserOffice userOffice : userOffices) {
                 params[userOffices.indexOf(userOffice)] = userOffice.getUserId();
             }
             if (params.length > 0) {
-                ew.addFilter("id={0}", params);
+                ew.in("id", params);
             } else {
                 ew.addFilter("id={0}", -1);
             }

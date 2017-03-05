@@ -34,6 +34,8 @@ public class OfficeServiceImplTest {
     private IAreaService areaService;
     @Resource
     private IUserOfficeService userOfficeService;
+    @Resource
+    private UserService userService;
 
     /**
      * 测试获取所有Office的方法
@@ -107,5 +109,13 @@ public class OfficeServiceImplTest {
         map.put("office_id", 2);
         List<UserOffice> userOffices = userOfficeService.selectByMap(map);
         userOffices.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectUserList() {
+        List<User> users = userService.selectList(new EntityWrapper<User>().addFilter("id={0}", -1));
+        for (User user : users) {
+            System.out.println(user);
+        }
     }
 }
