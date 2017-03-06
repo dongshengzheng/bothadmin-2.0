@@ -90,7 +90,6 @@ public class UserController extends BaseController {
             }
             // 根据部门集合，查出所在部门的UserOffice集合
             List<UserOffice> userOffices = userOfficeService.selectList(new EntityWrapper<UserOffice>().in("office_id", officeIdsSet));
-            userOffices.forEach(System.out::println);
             Object[] params = new Object[userOffices.size()];
             for (UserOffice userOffice : userOffices) {
                 params[userOffices.indexOf(userOffice)] = userOffice.getUserId();
@@ -127,6 +126,10 @@ public class UserController extends BaseController {
             user.setPassword(password);
             user.setDelFlag(Const.DEL_FLAG_NORMAL);
             userService.insert(user);
+            User user1 = userService.selectOne(user);
+            Office office = officeService.selectOne(new EntityWrapper<Office>().addFilter("parent_id={0}", "#"));
+            UserOffice userOffice = new UserOffice(user1.getId(), office.getId());
+            userOfficeService.insert(userOffice);
             jsonObject.put("status", 1);
         }
         return jsonObject;

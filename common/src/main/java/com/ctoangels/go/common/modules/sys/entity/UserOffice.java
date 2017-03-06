@@ -30,6 +30,13 @@ public class UserOffice implements Serializable {
     @TableField(value = "office_id")
     private Integer officeId;
 
+    public UserOffice() {
+    }
+
+    public UserOffice(Integer userId, Integer officeId) {
+        this.userId = userId;
+        this.officeId = officeId;
+    }
 
     public Integer getId() {
         return this.id;

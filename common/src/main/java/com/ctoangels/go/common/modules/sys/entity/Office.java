@@ -21,7 +21,7 @@ public class Office implements Serializable {
      * 编号
      */
     @TableId(type = IdType.AUTO)
-    private String id;
+    private Integer id;
     /**
      * 父级编号
      */
@@ -155,11 +155,11 @@ public class Office implements Serializable {
         this.checked = checked;
     }
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -56,7 +56,7 @@ public class OfficeController extends BaseController {
         State state;
         if (offices != null) {
             for (Office office : offices) {
-                tree = new Tree(office.getId(), office.getParentId(), office.getName());
+                tree = new Tree(office.getId().toString(), office.getParentId(), office.getName());
                 state = new State(true, false, false);
                 tree.setState(state);
                 trees.add(tree);
@@ -179,7 +179,7 @@ public class OfficeController extends BaseController {
         jsonObject.put("status", 1);
         office.setDelFlag(String.valueOf(Const.DEL_FLAG_NORMAL));
         office.setCode(code);
-        office.setId(id);
+        office.setId(Integer.parseInt(id));
         officeService.updateById(office);
         return jsonObject;
     }
