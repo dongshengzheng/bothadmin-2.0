@@ -7,5 +7,6 @@ https://github.com/baomidou/mybatis-plus/blob/master/mybatis-plus/src/test/java/
 
 www.goshipyard.com
 
-
+管理员账号：luzhen    zhen!520
+普通用户账号：qwe123   123123
 
