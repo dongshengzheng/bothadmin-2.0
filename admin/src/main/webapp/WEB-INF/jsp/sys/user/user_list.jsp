@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -8,19 +9,19 @@
 <go:navigater path="user"></go:navigater>
 
 <div class="row">
-    <%--<jsp:include page="../tree/tree.jsp"/>--%>
-    <div class="col-md-3">
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="font-blue-sharp"></i>
-                    <span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>
-                </div>
-            </div>
-            <div id="tree_body" class="portlet-body">
-            </div>
-        </div>
-    </div>
+    <jsp:include page="../tree/tree.jsp"/>
+    <%--<div class="col-md-3">--%>
+        <%--<div class="portlet light bordered">--%>
+            <%--<div class="portlet-title">--%>
+                <%--<div class="caption">--%>
+                    <%--<i class="font-blue-sharp"></i>--%>
+                    <%--<span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div id="tree_body" class="portlet-body">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
     <div class="col-md-9">
         <div class="portlet light bordered">
             <div class="portlet-body">
@@ -71,7 +72,7 @@
 </div>
 <script type="text/javascript">
     var defTable;
-    var tree = $('#tree_body');
+//    var tree = $('#tree_body');
     var r;
     $(document).ready(function () {
         defTable = $('#default_table').DataTable({
@@ -130,25 +131,25 @@
         });
 
         // 通过ajax创建树状图
-        tree.jstree({
-            'core': {
-                "multiple": false,
-                'data': {
-                    'url': 'office/findAllOffice',
-                    'data': function (result) {
-                        return result;
-                    }
-                }
-            },
-            "types": {
-                "default": {
-                    "icon": "fa fa-folder icon-state-warning icon-lg"
-                }
-            },
-            "plugins": ["types"]
-        });
+//        tree.jstree({
+//            'core': {
+//                "multiple": false,
+//                'data': {
+//                    'url': 'office/findAllOffice',
+//                    'data': function (result) {
+//                        return result;
+//                    }
+//                }
+//            },
+//            "types": {
+//                "default": {
+//                    "icon": "fa fa-folder icon-state-warning icon-lg"
+//                }
+//            },
+//            "plugins": ["types"]
+//        });
 
-        tree.on('select_node.jstree', function (e, data) {
+        $('#tree_body').on('select_node.jstree', function (e, data) {
             var i, j;
             for (i = 0, j = data.selected.length; i < j; i++) {
                 var node = data.instance.get_node(data.selected[i]);

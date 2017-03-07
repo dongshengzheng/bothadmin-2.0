@@ -22,6 +22,7 @@ import java.util.Map;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/spring-mybatis.xml")
 public class OfficeServiceImplTest {
+
     @Resource
     private IOfficeService officeService;
     @Resource

@@ -82,7 +82,7 @@
 </div>
 <div class="page-footer">
     <div class="page-footer-inner"> 2016 &copy;
-        <a href="http://a.goshipyard.com/" style="color:#337ab7"
+        <a href="javascript:void(0)" style="color:#337ab7"
            title="<fmt:message key="sys.site.title"/>" target="_blank"><fmt:message
                 key="sys.site.title"/></a><fmt:message key="login_copyrights_reserved"/>
     </div>

@@ -54,7 +54,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
+<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="javascript:void(0)"><fmt:message
         key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/></div>
 
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

@@ -84,10 +84,10 @@
                 "targets": 3,
                 "render": function (data, type, row) {
                     return ""
-                        <shiro:hasPermission name="role/editBtn">
+                        <shiro:hasPermission name="role/edit">
                         + '<a href="role/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="role/deleteBtn">
+                        <shiro:hasPermission name="role/delete">
                         + '<a href="role/delete?id=' + row.id + '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
                         </shiro:hasPermission>
                         <shiro:hasPermission name="role/editRight">

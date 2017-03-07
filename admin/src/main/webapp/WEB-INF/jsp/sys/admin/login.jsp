@@ -55,8 +55,9 @@
     <form role="form" method="post" action="" name="loginForm"
           id="loginForm">
         <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
-        <p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message
-                key="sys.user.register"/></a>!</p>
+        <%--注册功能--%>
+        <%--<p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message--%>
+                <%--key="sys.user.register"/></a>!</p>--%>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_username"/></label>
             <div class="input-icon">
@@ -88,7 +89,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
+<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="javascript:void(0)"><fmt:message
         key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/></div>
 
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

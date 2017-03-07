@@ -8,19 +8,19 @@
 <go:navigater path="office"/>
 
 <div class="row">
-    <%--<jsp:include page="../tree/tree.jsp"/>--%>
-    <div class="col-md-3">
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="font-blue-sharp"></i>
-                    <span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>
-                </div>
-            </div>
-            <div id="tree_body" class="portlet-body">
-            </div>
-        </div>
-    </div>
+    <jsp:include page="../tree/tree.jsp"/>
+    <%--<div class="col-md-3">--%>
+        <%--<div class="portlet light bordered">--%>
+            <%--<div class="portlet-title">--%>
+                <%--<div class="caption">--%>
+                    <%--<i class="font-blue-sharp"></i>--%>
+                    <%--<span class="caption-subject font-blue-sharp bold uppercase">机构管理</span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div id="tree_body" class="portlet-body">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
     <div class="col-md-9">
         <div class="portlet light bordered">
             <div class="portlet-body">
@@ -69,7 +69,7 @@
 </div>
 <script type="text/javascript">
     var defTable;
-    var tree = $('#tree_body');
+//    var tree = $('#tree_body');
     var r;
     $(document).ready(function () {
         defTable = $('#default_table').DataTable({
@@ -104,10 +104,10 @@
                 "targets": 4,
                 "render": function (data, type, row) {
                     return ""
-                        <shiro:hasPermission name="office/editBtn">
+                        <shiro:hasPermission name="office/edit">
                         + '<a href="office/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="office/deleteBtn">
+                        <shiro:hasPermission name="office/delete">
                         + '<a href="office/delete?id=' + row.id + '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
                         </shiro:hasPermission>
                         <shiro:hasPermission name="office/addSubsidiary">
@@ -124,25 +124,25 @@
         });
 
         // 通过ajax创建树状图
-        tree.jstree({
-            'core': {
-                "multiple": false,
-                'data': {
-                    'url': 'office/findAllOffice',
-                    'data': function (result) {
-                        return result;
-                    }
-                }
-            },
-            "types": {
-                "default": {
-                    "icon": "fa fa-folder icon-state-warning icon-lg"
-                }
-            },
-            "plugins": ["types"]
-        });
+//        tree.jstree({
+//            'core': {
+//                "multiple": false,
+//                'data': {
+//                    'url': 'office/findAllOffice',
+//                    'data': function (result) {
+//                        return result;
+//                    }
+//                }
+//            },
+//            "types": {
+//                "default": {
+//                    "icon": "fa fa-folder icon-state-warning icon-lg"
+//                }
+//            },
+//            "plugins": ["types"]
+//        });
 
-        tree.on('select_node.jstree', function (e, data) {
+        $('#tree_body').on('select_node.jstree', function (e, data) {
             var i, j;
             for (i = 0, j = data.selected.length; i < j; i++) {
                 var node = data.instance.get_node(data.selected[i]);
